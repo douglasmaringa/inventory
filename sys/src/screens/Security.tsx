@@ -2,7 +2,8 @@ import React, { useEffect,useState } from "react";
 import {db,auth} from '../firebase'
 import { useNavigate } from 'react-router-dom';
 
-export default function Reports() {
+
+export default function Security() {
     const[data,setData]=useState<any>([])
     const[department,setDepartment]=useState<string>("")
     const[deviceType,setDeviceType]=useState<string>("")
@@ -29,22 +30,17 @@ export default function Reports() {
 
   const logout = () => {
     
-    auth.signOut();
+      auth.signOut();
+      
+      navigate("/login")
     
-    navigate("/login")
-  
-}
-
-const open = ()=>{
-    navigate('/pdf', { state: data});
   }
-
 
   return (
     <div>
-         <div className="bg-gray-700">
+        <div className="bg-blue-700">
         <button onClick={logout}  className="text-lg font-medium text-white dark:text-blue-500 hover:underline">Logout</button>
-          <h1 className="text-white font-bold text-xl text-center">Welcome Reports Page</h1> 
+          <h1 className="text-white font-bold text-xl text-center">Welcome Security Team</h1> 
         </div>
         <div style={{"display":"grid","gridTemplateColumns":"1fr 1fr"}}>
             <div className="mx-10 mt-4">
@@ -63,15 +59,15 @@ const open = ()=>{
             </div>
 
             <div className="mx-10 mt-4">
-            <label  className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Device Type</label>
+            <label  className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Department</label>
             <select value={department} onChange={(e)=>{setDepartment(e.target.value)}} className="bg-gray-50 mb-6 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
   <option selected>Filter by Department</option>
-  <option value="laptop">HR</option>
-  <option value="phone">security</option>
-  <option value="watch">operations</option>
-  <option value="laptop">marketing</option>
-  <option value="phone">finance</option>
-  <option value="watch">logistics</option>
+  <option value="HR">HR</option>
+  <option value="security">security</option>
+  <option value="operations">operations</option>
+  <option value="marketing">marketing</option>
+  <option value="finance">finance</option>
+  <option value="logistics">logistics</option>
 </select>
 <button onClick={byDep} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Filter</button>
        
@@ -141,8 +137,6 @@ const open = ()=>{
             
         </tbody>
     </table>
-    <button onClick={open} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 mt-4 dark:focus:ring-blue-800">Download Report</button>
- 
 </div>
         </div>
   )
